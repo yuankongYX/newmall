@@ -94,11 +94,11 @@ export default {
           page: 0,
           list: []
         },
-        'latest': {
+        'new': {
           page: 0,
           list: []
         },
-        'selection': {
+        'sell': {
           page: 0,
           list: []
         }
@@ -106,22 +106,35 @@ export default {
     }
   },
   created() {
-    this.getHomeMuliData(),
-      this.getHomeGoods()
+    this.getHomeMuliData()
+    this.getHomeGoods('pop')
+    this.getHomeGoods('pop')
+    this.getHomeGoods('pop')
+    this.getHomeGoods('pop')
+    this.getHomeGoods('pop')
+    this.getHomeGoods('pop')
+    this.getHomeGoods('pop')
+    this.getHomeGoods('pop')
+    // this.getHomeGoods('new')
+    // this.getHomeGoods('sell')
   },
   methods: {
     getHomeMuliData() {
       getHomeMuliData().then(res => {
-        console.log(res);
+        // console.log(res);
         this.banners = res.data.banner.list;
         this.recommends = res.data.recommend.list;
       })
     },
-    getHomeGoods() {
-      getHomeGoods('pop', 1).then(res => {
-        console.log("==")
+    getHomeGoods(type) {
+      const pagee = this.goods[type].page + 1
+      getHomeGoods(type, pagee).then(res => {
+        console.log('=')
         console.log(res)
-        console.log("==")
+        this.goods[type].list.push(...res.data.list)
+        // this.goods[type].list.concat(res.data.list)
+        this.goods[type].page += 1
+        console.log(this.goods[type].page)
       })
     }
   }

@@ -8,12 +8,13 @@ export function request(options) {
     })
 
     //拦截器
-  instance.interceptors.request.use(config => {
-    console.log(config)
-    return config
-  }, err => {
-    console.log(err);
-  })
+    instance.interceptors.request.use(config => {
+      console.log(config)
+      return config
+    }, err => {
+      console.log(err);
+    })
+  
     instance.interceptors.response.use(res => {
       return res.data
     }, err => {
